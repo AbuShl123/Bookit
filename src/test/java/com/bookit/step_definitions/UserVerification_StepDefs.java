@@ -1,6 +1,7 @@
 package com.bookit.step_definitions;
 
 import com.bookit.utilities.BookitUtils;
+import com.bookit.utilities.Environment;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,7 +10,6 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.*;
-import static com.bookit.utilities.ConfigurationReader.*;
 
 public class UserVerification_StepDefs {
     String token;
@@ -25,7 +25,7 @@ public class UserVerification_StepDefs {
     public void i_sent_get_request_to_endpoint(String endpoint) {
          response = given().accept(ContentType.JSON)
                 .header("Authorization", token)
-                .when().get(getProperty("base_url") + endpoint)
+                .when().get(Environment.BASE_URL + endpoint)
                 .then().extract().response();
     }
 
