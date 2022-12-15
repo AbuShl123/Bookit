@@ -19,12 +19,12 @@ public class Environment {
     public static final String LEADER_PASSWORD;
 
 
-    static{
+    static {
         Properties properties = null;
         String environment = System.getProperty("environment") != null ? environment = System.getProperty("environment") : ConfigurationReader.getProperty("environment");
 
         try {
-
+            // path returns the current path of framework
             String path = System.getProperty("user.dir") + "/src/test/resources/Environments/" + environment + ".properties";
 
             FileInputStream input = new FileInputStream(path);
@@ -34,6 +34,8 @@ public class Environment {
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("whooops!");
+            System.exit(1);
         }
 
         URL = properties.getProperty("url");
