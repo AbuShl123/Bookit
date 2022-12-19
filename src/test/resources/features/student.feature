@@ -6,7 +6,7 @@ Feature: Create Student
     When I sent POST request "/api/students/student" endpoint with following information
       | first-name      | Itachi                       |
       | last-name       | Uchiha                       |
-      | email           | 998itachiUchiha867@cydeo.com |
+      | email           | 798itachiUchiha867@cydeo.com |
       | password        | abc12300_123                 |
       | role            | student-team-member          |
       | campus-location | VA                           |

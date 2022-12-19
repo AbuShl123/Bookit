@@ -1,0 +1,3 @@
+select * from pg_auth_members;
+
+select * from pg_database;

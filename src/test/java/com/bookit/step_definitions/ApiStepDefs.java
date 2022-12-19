@@ -2,6 +2,7 @@ package com.bookit.step_definitions;
 
 import com.bookit.utilities.BookitUtils;
 import com.bookit.utilities.Environment;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -63,11 +64,40 @@ public class ApiStepDefs {
                 .when().post(Environment.BASE_URL + endpoint);
 
     }
+
     @Then("I delete previously added student")
     public void i_delete_previously_added_student() {
 
+        int idToDelete = response.path("entryiId");
 
+        System.out.println("entryId = " + idToDelete);
 
+        given().header("Authorization", token)
+                .pathParam("id", idToDelete)
+                .when().delete(Environment.BASE_URL + "/api/student/{id}");
+    }
 
+    @When("users send POST request to {string} with following info:")
+    public void usersSendPOSTRequestToWithFollowingInfo(String endpoint, Map<String, String> teamInfo) {
+        response = given().header("Authorization", token)
+                .queryParams(teamInfo)
+                .when().post(Environment.BASE_URL + endpoint)
+                .then().extract().response();
+    }
+
+    @And("DataBase should persist same team info")
+    public void databaseShouldPersistSameTeamInfo() {
+        System.out.println("like correct");
+    }
+
+    @And("User deletes previously added team")
+    public void userDeletesPreviouslyAddedTeam() {
+        response.prettyPeek();
+        int idToDelete = response.path("entryiId");
+        System.out.println("idToDelete = " + idToDelete);
+
+        given().header("Authorization", token)
+                .pathParam("id", idToDelete)
+                .when().delete(Environment.BASE_URL + "/api/teams/{id}");
     }
 }
